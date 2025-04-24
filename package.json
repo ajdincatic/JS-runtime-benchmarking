@@ -1,0 +1,29 @@
+{
+  "name": "js-runtime-benchmarks",
+  "version": "1.0.0",
+  "description": "Benchmark tests for comparing JavaScript runtimes (Node.js, Deno, Bun)",
+  "main": "node-server.js",
+  "license": "MIT",
+  "scripts": {
+    "start:node": "node servers/node-server.js",
+    "start:deno": "deno run --allow-net servers/deno-server.ts",
+    "start:bun": "bun servers/bun-server.js",
+    "check:node": "node -v",
+    "check:deno": "deno --version",
+    "check:bun": "bun --version",
+    "check:all": "npm run check:node && npm run check:deno && npm run check:bun",
+    "test:k6": "k6 run k6-scripts/basic-test.js",
+    "test:ab": "bash apache-benchmark/ab-commands.sh",
+    "test:artillery": "artillery run artillery/config.yml",
+    "prometheus:start": "sudo docker-compose -f prometheus/docker-compose.yml up -d",
+    "prometheus:stop": "sudo docker-compose -f prometheus/docker-compose.yml down",
+    "benchmark": "bash benchmark-runner.sh"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "artillery": "^2.0.0",
+    "prom-client": "^14.2.0"
+  }
+} 

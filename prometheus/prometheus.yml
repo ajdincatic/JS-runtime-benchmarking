@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'nodejs'
+    static_configs:
+      - targets: ['host.docker.internal:3000']
+    metrics_path: /metrics
+    scheme: http
+
+  - job_name: 'deno'
+    static_configs:
+      - targets: ['host.docker.internal:3000']
+    metrics_path: /metrics
+    scheme: http
+
+  - job_name: 'bun'
+    static_configs:
+      - targets: ['host.docker.internal:3000']
+    metrics_path: /metrics
+    scheme: http

@@ -1,0 +1,48 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 50
+      name: "Warm up phase"
+    - duration: 120
+      arrivalRate: 50
+      name: "Sustained load phase"
+    - duration: 60
+      arrivalRate: 50
+      rampTo: 5
+      name: "Ramp down phase"
+  plugins:
+    metrics-by-endpoint: {}
+  processor: "./processor.js"
+  
+scenarios:
+  - name: "Basic Endpoints Test"
+    flow:
+      - get:
+          url: "/ping"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+      - think: 1
+      
+      - get:
+          url: "/compute"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+      - think: 1
+      
+      - get:
+          url: "/memory"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+      - think: 1
+      
+      - get:
+          url: "/bulk"
+          expect:
+            - statusCode: 200
+            - contentType: "application/json"
+      - think: 1 
