@@ -2,16 +2,25 @@ config:
   target: "http://localhost:3000"
   phases:
     - duration: 60
-      arrivalRate: 5
-      rampTo: 50
-      name: "Warm up phase"
-    - duration: 120
-      arrivalRate: 50
-      name: "Sustained load phase"
+      arrivalRate: 100
+      name: "Low load phase"
+    - duration: 15
+      arrivalRate: 0
+      name: "Cool-down period"
+
     - duration: 60
-      arrivalRate: 50
-      rampTo: 5
-      name: "Ramp down phase"
+      arrivalRate: 500
+      name: "Medium load phase"
+    - duration: 15
+      arrivalRate: 0
+      name: "Cool-down period"
+
+    - duration: 60
+      arrivalRate: 1000
+      name: "High load phase"
+    - duration: 15
+      arrivalRate: 0
+      name: "Cool-down period"
   plugins:
     metrics-by-endpoint: {}
   processor: "./processor.js"
