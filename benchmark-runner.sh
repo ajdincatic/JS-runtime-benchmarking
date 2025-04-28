@@ -124,7 +124,7 @@ run_benchmarks() {
   if command_exists ab; then
     echo "Running Apache Benchmark for $runtime..."
     chmod +x apache-benchmark/ab-commands.sh
-    SERVER_URL="http://localhost:3000" ./apache-benchmark/ab-commands.sh > results/ab-$runtime.log
+    SERVER_URL="http://localhost:3000" RUNTIME="$runtime" ./apache-benchmark/ab-commands.sh > results/ab-$runtime.log
   fi
   
   # Artillery if available
